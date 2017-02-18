@@ -49,7 +49,9 @@ function modifyText(text, settings) {
 	// You'll need to update this method to return the updated text.
 	var copy = text;
 	for (var key in settings) {
-		copy = copy.replace(RegExp(key, "i"), settings[key])
+		if (settings.hasOwnProperty(key)) {
+			copy = copy.replace(RegExp(key, "i"), settings[key]);
+		}
 	}
 	return copy;
 }
@@ -81,14 +83,15 @@ function modifyText(text, settings) {
 function parseSettings(lines) {
 	// Currently, this method returns nothing. You'll have to
 	// update this method to return the replacement rules.
+	console.log(lines);
 	var split_lines = lines.map(function(line) {
-		line.split('->')
+		return line.split('->').map(function(line) { return line.trim() });
 	});
 
 	rules = {}
 
 	for (var i = 0; i < split_lines.length; i++) {
-		rules[split_lines[0]] = split_lines[1]
+		rules[split_lines[i][0]] = split_lines[i][1];
 	}
 	return rules;
 }
