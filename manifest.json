@@ -16,14 +16,14 @@
   "version": "0.0.1",
 
   // Recommended
-  "description": "Pause the video when someone interrupts your chill session. Made at TreeHacks 2016.",
+  "description": "Pause the video when someone interrupts your chill session. Built at TreeHacks 2017.",
   "icons": {
-    "16": "icons/TreeHacks-white-16.png",
-    "32": "icons/TreeHacks-white-32.png",
-    "48": "icons/TreeHacks-white-48.png",
-    "64": "icons/TreeHacks-white-64.png",
-    "96": "icons/TreeHacks-white-96.png",
-    "128": "icons/TreeHacks-white-128.png"
+    "16": "icons/and_pause.png",
+    "32": "icons/and_pause.png",
+    "48": "icons/and_pause.png",
+    "64": "icons/and_pause.png",
+    "96": "icons/and_pause.png",
+    "128": "icons/and_pause.png"
   },
 
   // Optional
