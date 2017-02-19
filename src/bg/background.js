@@ -28,17 +28,17 @@
 
 var enabled = false;
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+//chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     chrome.browserAction.onClicked.addListener(function() {
         enabled = !enabled;
         if (enabled) {
             console.log("Enabled");
             chrome.browserAction.setBadgeText({text: "on"});
-            chrome.tabs.executeScript(tabId, { file: '../inject/pause.js' } );
+            //chrome.tabs.executeScript(tabId, { file: '../inject/pause.js' } );
         } else {
             console.log("Disabled");
             chrome.browserAction.setBadgeText({text: "off"});
-            chrome.tabs.executeScript(tabId, {code: 'alert()'} );
+            //chrome.tabs.executeScript(tabId, {code: ';'} );
         }
     });
-});
+//});

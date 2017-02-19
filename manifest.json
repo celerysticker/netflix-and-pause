@@ -55,5 +55,13 @@
     "default_title": "Netflix and Pause"
   },
   "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*"
+      ],
+      "js": [
+        "src/inject/pause.js"
+      ]
+    }
   ]
 }

@@ -31,17 +31,17 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
 					return;
 				}
 				var youtube = "ytp-play-button";
-				var netflix = "player-control-button player-play-pause";
+				//var netflix = "player-control-button player-play-pause";
 				// Get tab URL
                 var url = tabs[0].url;
 				console.log("Found tab url:" + url);
                 sleep(5000).then(() => {
 					console.log("Pausing video!");
-                    if (url.match(/netflix/)) {
-                        pause(netflix);
-                    } else if (url.match(/youtube/)) {
+                    //if (url.match(/netflix\.com/)) {
+                    //    pause(netflix);
+                    //} else if (url.match(/youtube\.com/)) {
                         pause(youtube);
-                    }
+                    //}
                 });
             }
 		}, 10);
