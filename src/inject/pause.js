@@ -20,30 +20,49 @@ function pause(element) {
 	document.getElementsByClassName(element)[0].click();
 }
 
-chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
-	chrome.extension.sendRequest({getState: "enabled"}, (response) => {
-		var readyStateCheckInterval = setInterval(() => {
-			// Executes when page is done loading
-			if (document.readyState === "complete") {
-				clearInterval(readyStateCheckInterval);
-				var enabled = response.result;
-				if (!enabled) {
-					return;
-				}
-				var youtube = "ytp-play-button";
-				//var netflix = "player-control-button player-play-pause";
-				// Get tab URL
-                var url = tabs[0].url;
-				console.log("Found tab url:" + url);
-                sleep(5000).then(() => {
-					console.log("Pausing video!");
-                    //if (url.match(/netflix\.com/)) {
-                    //    pause(netflix);
-                    //} else if (url.match(/youtube\.com/)) {
-                        pause(youtube);
-                    //}
-                });
-            }
-		}, 10);
+function record(enabled) {
+	// Find current tab
+	//chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
+	if (!enabled) {
+		return;
+	}
+	var youtubeButton = "ytp-play-button";
+	//var netflix = "player-control-button player-play-pause";
+	// Get tab URL
+	/*
+	var url = tabs[0].url;
+	console.log("Found tab url:" + url);
+	*/
+	// TODO: replace sleep with audio code
+	var wait_time = 500; // ms
+
+	sleep(wait_time).then(() => {
+		console.log("Pausing video!");
+		//if (url.match(/netflix\.com/)) {
+		//    pause(netflix);
+		//} else if (url.match(/youtube\.com/)) {
+			pause(youtubeButton);
+		//}
 	});
-});
+}
+
+// Wait until page is loaded
+var readyStateCheckInterval = setInterval(function() {
+    if (document.readyState === "complete") {
+        clearInterval(readyStateCheckInterval);
+
+		// Attempt recording intially.
+		// Request response from background, asking if recording is enabled.
+		chrome.runtime.sendMessage({}, (response) => {
+			record(response.record);
+		});
+
+		// Receive message from background, initiating recording.
+		chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+			record(request.record);
+			sendResponse({});
+		});
+    }
+}, 10);
+
+// TODO: handle interrupt signal from background (i.e. user presses button to disable, while recording)

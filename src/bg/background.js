@@ -29,7 +29,8 @@
 var enabled = false;
 
 //chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    chrome.browserAction.onClicked.addListener(function() {
+chrome.browserAction.onClicked.addListener(() => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
         enabled = !enabled;
         if (enabled) {
             console.log("Enabled");
@@ -40,5 +41,13 @@ var enabled = false;
             chrome.browserAction.setBadgeText({text: "off"});
             //chrome.tabs.executeScript(tabId, {code: ';'} );
         }
+        // Message all tabs with new record state
+        for (var i = 0; i < tabs.length; i++) {
+            chrome.tabs.sendMessage(tabs[i].id, {record: enabled}, (response) => {});
+        }
     });
-//});
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    sendResponse({record: enabled});
+});
