@@ -34,6 +34,7 @@
   // For a list of possibilities, see
   // https://developer.chrome.com/extensions/declare_permissions
   "permissions": [
+    "tabs"
   ],
 
   /****************************************************************/
@@ -54,26 +55,8 @@
   },
   "browser_action": {
     "default_icon": "icons/TreeHacks-white-19.png",
-    "default_title": "Cal to Butt",
-    "default_popup": "src/browser_action/browser_action.html"
+    "default_title": "Netflix and Pause"
   },
   "content_scripts": [
-    {
-      // Run the inject.js script on all HTTP(s) pages
-      "matches": [
-        "https://www.netflix.com/watch*"
-      ],
-      "js": [
-        "src/inject/netflix.js"
-      ]
-    },
-    {
-      "matches": [
-        "https://www.youtube.com/watch*"
-      ],
-      "js": [
-        "src/inject/youtube.js"
-      ]
-    }
   ]
 }

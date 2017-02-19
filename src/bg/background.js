@@ -25,3 +25,9 @@
  */
 
 /* EMPTY */
+
+chrome.browserAction.onClicked.addListener(function() {
+  console.log("Clicked icon!");
+  chrome.browserAction.setBadgeText({text: "on"});
+  chrome.tabs.executeScript( { file: 'pause.js' } );
+});
