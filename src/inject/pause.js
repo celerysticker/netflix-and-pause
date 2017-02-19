@@ -66,7 +66,7 @@ function record(enabled) {
 
 	recognition.onspeechend = function(event) {
 		console.log("speech ended");
-		setTimeout(play(video), 1000);
+		setTimeout(play, 5000, video);
 	}
 
 	recognition.onend = function(event) {
