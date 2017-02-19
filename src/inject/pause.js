@@ -44,12 +44,27 @@ function record(enabled) {
 		play(video);
 		return;
 	}
-	// TODO: replace sleep with audio code
-	var wait_time = 100; // ms
 
-	sleep(wait_time).then(() => {
-		pauseOrPlay(video);
-	});
+ 	console.log("gettingAudio");
+	var recognition = new webkitSpeechRecognition();
+	recognition.continuous = false;
+	recognition.interimResults = true;
+	
+	recognition.onspeechstart = function(event) {
+		console.log("speech started");
+		pause();
+	}
+
+	recognition.onspeechend = function(event) {
+		console.log("speech ended");
+		play();
+	}
+
+	recognition.onend = function(event) {
+		recognition.start();
+	}
+
+	recognition.start();
 }
 
 // Wait until page is loaded
