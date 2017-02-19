@@ -51,7 +51,7 @@
     "chrome_style": true
   },
   "browser_action": {
-    "default_icon": "icons/TreeHacks-white-19.png",
+    "default_icon": "icons/and_pause.png",
     "default_title": "Netflix and Pause"
   },
   "content_scripts": [

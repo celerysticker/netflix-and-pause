@@ -52,12 +52,12 @@ function record(enabled) {
 	
 	recognition.onspeechstart = function(event) {
 		console.log("speech started");
-		pause();
+		pause(video);
 	}
 
 	recognition.onspeechend = function(event) {
 		console.log("speech ended");
-		play();
+		play(video);
 	}
 
 	recognition.onend = function(event) {
