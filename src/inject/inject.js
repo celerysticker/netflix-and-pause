@@ -132,27 +132,27 @@ function parseSettings(lines) {
 
  function getAudio() {
  	console.log("gettingAudio");
- 	navigator.getUserMedia = navigator.getUserMedia ||
-	                         navigator.webkitGetUserMedia ||
-	                         navigator.mozGetUserMedia;
 
-	if (navigator.getUserMedia) {
-	   navigator.getUserMedia({ audio: { echoCancellation: true }, video: true },
-	      function(stream) {
-	      	console.log(stream);
-	         // var video = document.querySelector('video');
-	         // video.srcObject = stream;
-	         // video.onloadedmetadata = function(e) {
-	         //   video.play();
-	         // };
-	      },
-	      function(err) {
-	         console.log("The following error occurred: " + err.name);
-	      }
-	   );
-	} else {
-	   console.log("getUserMedia not supported");
+	
+	var recognition = new webkitSpeechRecognition();
+	recognition.continuous = false;
+	recognition.interimResults = true;
+	
+	var interim_length = 0;
+	var final_transcript = '';
+	var speech_stopped = false;
+
+	recognition.onspeechstart = function(event) {
+		console.log("speech started");
 	}
+
+	recognition.onspeechend = function(event) {
+		speech_stopped = true;
+		console.log("speech ended");
+	}
+
+	recognition.start();
+	
  }
 
 /****************************w************
