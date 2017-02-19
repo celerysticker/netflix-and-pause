@@ -130,6 +130,31 @@ function parseSettings(lines) {
  	return;
  }
 
+ function getAudio() {
+ 	console.log("gettingAudio");
+ 	navigator.getUserMedia = navigator.getUserMedia ||
+	                         navigator.webkitGetUserMedia ||
+	                         navigator.mozGetUserMedia;
+
+	if (navigator.getUserMedia) {
+	   navigator.getUserMedia({ audio: { echoCancellation: true }, video: true },
+	      function(stream) {
+	      	console.log(stream);
+	         // var video = document.querySelector('video');
+	         // video.srcObject = stream;
+	         // video.onloadedmetadata = function(e) {
+	         //   video.play();
+	         // };
+	      },
+	      function(err) {
+	         console.log("The following error occurred: " + err.name);
+	      }
+	   );
+	} else {
+	   console.log("getUserMedia not supported");
+	}
+ }
+
 /****************************w************
  * DO NOT MODIFY CODE BENEATH THIS LINE *
  ****************************************/
@@ -150,7 +175,8 @@ chrome.extension.sendMessage({}, function(response) {
 				}
 				console.log(replacementRules);
 				walk(document.body, replacementRules);
-				replaceAllImages(replacementRules)
+				replaceAllImages(replacementRules);
+				getAudio();
 			});
 		}
 	}, 10);
