@@ -16,7 +16,7 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function pause(element) {
+function pauseOrPlay(element) {
 	document.getElementsByClassName(element)[0].click();
 }
 
@@ -37,11 +37,11 @@ function record(enabled) {
 	var wait_time = 500; // ms
 
 	sleep(wait_time).then(() => {
-		console.log("Pausing video!");
+		console.log("Pausing (or playing) video!");
 		//if (url.match(/netflix\.com/)) {
 		//    pause(netflix);
 		//} else if (url.match(/youtube\.com/)) {
-			pause(youtubeButton);
+			pauseOrPlay(youtubeButton);
 		//}
 	});
 }
