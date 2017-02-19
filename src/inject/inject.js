@@ -138,16 +138,20 @@ function parseSettings(lines) {
 	
 	var interim_length = 0;
 	var final_transcript = '';
-	var speech_stopped = false;
+	var speech_stopped = true;
 
 	recognition.onspeechstart = function(event) {
+		speech_stopped = false;
 		console.log("speech started");
 	}
 
 	recognition.onspeechend = function(event) {
 		speech_stopped = true;
 		console.log("speech ended");
-		getAudio();
+	}
+
+	recognition.onend = function(event) {
+		recognition.start();
 	}
 
 	recognition.start();
