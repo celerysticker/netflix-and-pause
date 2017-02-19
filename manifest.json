@@ -12,7 +12,7 @@
 {
   // Required
   "manifest_version": 2,
-  "name": "Netflix or Pause",
+  "name": "Netflix and Pause",
   "version": "0.0.1",
 
   // Recommended
