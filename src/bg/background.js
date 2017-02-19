@@ -28,18 +28,24 @@
 
 var enabled = false;
 
+function indicateEnabled() {
+    console.log("Enabled");
+    chrome.browserAction.setBadgeText({text: "on"});
+}
+
+function indicateDisabled() {
+    console.log("Disabled");
+    chrome.browserAction.setBadgeText({text: "off"});
+}
+
 //chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 chrome.browserAction.onClicked.addListener(() => {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
         enabled = !enabled;
         if (enabled) {
-            console.log("Enabled");
-            chrome.browserAction.setBadgeText({text: "on"});
-            //chrome.tabs.executeScript(tabId, { file: '../inject/pause.js' } );
+            indicateEnabled();
         } else {
-            console.log("Disabled");
-            chrome.browserAction.setBadgeText({text: "off"});
-            //chrome.tabs.executeScript(tabId, {code: ';'} );
+            indicateDisabled();
         }
         // Message all tabs with new record state
         for (var i = 0; i < tabs.length; i++) {

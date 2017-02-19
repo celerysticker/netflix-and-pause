@@ -20,12 +20,17 @@ function getVideoElement() {
 	return document.getElementsByTagName("video")[0];
 }
 
-function pause() {
-	getVideoElement().pause();
+function play(video) {
+	console.log("Playing video!");
+	video.play();
 }
 
-function pauseOrPlay() {
-	var video = getVideoElement();
+function pause(video) {
+	console.log("Pausing video!");
+	video.pause();
+}
+
+function pauseOrPlay(video) {
 	if (video.paused) {
 		video.play();
 	} else {
@@ -34,28 +39,16 @@ function pauseOrPlay() {
 }
 
 function record(enabled) {
-	// Find current tab
-	//chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
+	var video = getVideoElement();
 	if (!enabled) {
-		play();
+		play(video);
+		return;
 	}
-	var youtubeButton = "ytp-play-button";
-	//var netflix = "player-control-button player-play-pause";
-	// Get tab URL
-	/*
-	var url = tabs[0].url;
-	console.log("Found tab url:" + url);
-	*/
 	// TODO: replace sleep with audio code
-	var wait_time = 500; // ms
+	var wait_time = 100; // ms
 
 	sleep(wait_time).then(() => {
-		console.log("Pausing (or playing) video!");
-		//if (url.match(/netflix\.com/)) {
-		//    pause(netflix);
-		//} else if (url.match(/youtube\.com/)) {
-			pauseOrPlay();
-		//}
+		pauseOrPlay(video);
 	});
 }
 
@@ -70,7 +63,7 @@ var readyStateCheckInterval = setInterval(function() {
 			record(response.record);
 		});
 
-		// Receive message from background, initiating recording.
+		// Receive message from background, initiating or stopping recording.
 		chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			record(request.record);
 			sendResponse({});
