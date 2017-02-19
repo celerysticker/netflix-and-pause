@@ -16,15 +16,28 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function pauseOrPlay(element) {
-	document.getElementsByClassName(element)[0].click();
+function getVideoElement() {
+	return document.getElementsByTagName("video")[0];
+}
+
+function pause() {
+	getVideoElement().pause();
+}
+
+function pauseOrPlay() {
+	var video = getVideoElement();
+	if (video.paused) {
+		video.play();
+	} else {
+		video.pause();
+	}
 }
 
 function record(enabled) {
 	// Find current tab
 	//chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, (tabs) => {
 	if (!enabled) {
-		return;
+		play();
 	}
 	var youtubeButton = "ytp-play-button";
 	//var netflix = "player-control-button player-play-pause";
@@ -41,7 +54,7 @@ function record(enabled) {
 		//if (url.match(/netflix\.com/)) {
 		//    pause(netflix);
 		//} else if (url.match(/youtube\.com/)) {
-			pauseOrPlay(youtubeButton);
+			pauseOrPlay();
 		//}
 	});
 }

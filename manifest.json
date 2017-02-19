@@ -57,7 +57,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.youtube.com/watch*"
+        "https://*/*"
       ],
       "js": [
         "src/inject/pause.js"
