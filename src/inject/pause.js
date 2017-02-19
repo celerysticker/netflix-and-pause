@@ -17,7 +17,12 @@ function sleep (time) {
 }
 
 function getVideoElement() {
-	return document.getElementsByTagName("video")[0];
+	var videos = document.getElementsByTagName("video");
+	if (videos.length > 0) {
+		return videos[0];
+	} else {
+		return null;
+	}
 }
 
 function play(video) {
@@ -40,6 +45,10 @@ function pauseOrPlay(video) {
 
 function record(enabled) {
 	var video = getVideoElement();
+	if (!video) {
+		return;
+	}
+
 	if (!enabled) {
 		play(video);
 		return;
