@@ -131,9 +131,7 @@ function parseSettings(lines) {
  }
 
  function getAudio() {
- 	console.log("gettingAudio");
-
-	
+ 	//console.log("gettingAudio");
 	var recognition = new webkitSpeechRecognition();
 	recognition.continuous = false;
 	recognition.interimResults = true;
@@ -149,6 +147,7 @@ function parseSettings(lines) {
 	recognition.onspeechend = function(event) {
 		speech_stopped = true;
 		console.log("speech ended");
+		getAudio();
 	}
 
 	recognition.start();
