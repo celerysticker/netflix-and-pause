@@ -10,7 +10,7 @@ You know how sometimes you're watching Netflix/YouTube/Hulu/etc and then a "frie
 Netflix & Pause is a Chrome extension that works on pages with videos. When a conversation is detected, the video is paused for the duration of the conversation. Beyond watching videos for leisure with friends, this technology could be used to integrate video demos and lectures in classrooms. The teacher can play an educational video (such as a demo or Khan academy lecture), and then answer student questions and enhance the presentation seamlessly with explanations.
 
 ### How we built it
-We built on TreeHacks' Cal-to-Butt Chrome extension hackpack, thanks TreeHacks team! Speech-to-text is done with the Web Speech API.
+We built on TreeHacks' Cal-to-Butt Chrome extension hackpack, thanks TreeHacks team! The microphone picks up a continuous stream of audio. Snippets are uploaded to the cloud for speech-to-text analysis (with Web Speech API), and partial results are returned. We analyze the results by looking for potential speech and end-of-conversation.
 
 ### Challenges we ran into
 Audio processing. It was difficult to distinguish between the presenter of TED talk video and the user. No speech-to-text API (1) had the built-in function of subtracting system audio and (2) could run locally without sending ALL audio to the cloud for processing. In the end, we went with a lightweight web API and checked for potential speech sounds rather than certain English. 
