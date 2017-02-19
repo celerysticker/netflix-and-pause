@@ -20,10 +20,14 @@ function pause(element) {
 	document.getElementsByClassName(element)[0].click();
 }
 
-chrome.extension.sendMessage({}, (response) => {
+chrome.extension.sendRequest({getState: "enabled"}, (response) => {
 	var readyStateCheckInterval = setInterval(() => {
         // Executes when page is done loading
 		if (document.readyState === "complete") {
+			var enabled = response.result;
+			if (!enabled) {
+				return;
+			}
             var youtube = "ytp-play-button";
             var netflix = "player-control-button player-play-pause";
 			clearInterval(readyStateCheckInterval);

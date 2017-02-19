@@ -26,8 +26,16 @@
 
 /* EMPTY */
 
+var enabled = false;
+
 chrome.browserAction.onClicked.addListener(function() {
   console.log("Clicked icon!");
-  chrome.browserAction.setBadgeText({text: "on"});
-  chrome.tabs.executeScript( { file: 'pause.js' } );
+  enabled = !enabled;
+  if (enabled) {
+    chrome.browserAction.setBadgeText({text: "on"});
+    chrome.tabs.executeScript(tab.id, { file: 'pause.js' } );
+  } else {
+    chrome.browserAction.setBadgeText({text: "off"});
+    chrome.tabs.executeScript(tab.id, {} );
+  }
 });

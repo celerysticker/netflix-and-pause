@@ -45,7 +45,7 @@
     "scripts": [
       "src/bg/background.js"
     ],
-    "persistent": false // Event page
+    "persistent": true // Event page
   },
   "options_ui": {
     // Required.
